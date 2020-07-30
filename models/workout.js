@@ -8,31 +8,38 @@ const exerciseSchema = new Schema(
         // starts by getting date to allow user to enter workouts on different dates
         day: {
             type: Date,
+            // defaults to current date
             default:() => Date.now()
         },
-        // stores exercie information in an array
+        // stores exercise information in an array to pass to database
         exercises: [
             {
+                // string to hold type of workout (resistance or cardio)
                 type: {
                     type: String,
                     trim: true,
-                    requird: "Enter type of exercise"
+                    required: "Enter type of exercise",
                 }, 
+                // string to hold name of workout
                 name: {
                     type: String,
                     trim: true,
-                    requird: "Please name the exercise"
+                    required: "Please name the exercise"
                 },
+                // number to hold number of minutes workout was performed
                 duration: {
                     type: Number,
-                    requird: "Enter the amount of time taken for the exercise in minutes"
+                    required: "Enter the amount of time taken for the exercise in minutes"
                 },
+                // number to hold weight of resistance workout
                 weight: {
                     type: Number
                 }, 
+                // number to hold the number of reps of resistance workout
                 reps: {
                     type: Number
                 },
+                // number to hold the number of sets of resistance workout
                 sets: {
                     type: Number
                 },
@@ -43,6 +50,7 @@ const exerciseSchema = new Schema(
         ]
     },
     {
+        // parses virtaul properties to json
         toJSON: {
             // includes virtual properties | Not persisted to db
             virtuals: true
@@ -50,7 +58,7 @@ const exerciseSchema = new Schema(
     }
 );
 
-// adds virtual property of total workout time
+// Gets total time from workout by adding exercise times for stats page | Not stored in db
 exerciseSchema.virtual("totalTime").get(function () {
     return this.exercises.reduce((total, exercise) => {
         return total + exercise.time;

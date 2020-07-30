@@ -11,14 +11,14 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+// serves static files through public folder
 app.use(express.static("public"));
 
+// connects to workouts db
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
     useNewUrlParser: true,
     useFindAndModify: false
 });
-
-
 
 // requires routes from route folder
 app.use(require("./routes/api.js"));
