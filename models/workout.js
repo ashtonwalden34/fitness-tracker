@@ -8,7 +8,7 @@ const exerciseSchema = new Schema(
         // starts by getting date to allow user to enter workouts on different dates
         day: {
             type: Date,
-            // default:() => Date.now()
+            default:() => Date.now()
         },
         // stores exercie information in an array
         exercises: [
@@ -23,7 +23,7 @@ const exerciseSchema = new Schema(
                     trim: true,
                     requird: "Please name the exercise"
                 },
-                time: {
+                duration: {
                     type: Number,
                     requird: "Enter the amount of time taken for the exercise in minutes"
                 },
@@ -58,6 +58,6 @@ exerciseSchema.virtual("totalTime").get(function () {
 });
 
 // creates "workouts" collection in database and adds workoutSchema
-const Workout = mongoose.model("Workout", workoutSchema);
+const Workout = mongoose.model("Workout", exerciseSchema);
 // exports workout object
 module.exports = Workout;

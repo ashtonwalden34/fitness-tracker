@@ -13,16 +13,18 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
     useNewUrlParser: true,
     useFindAndModify: false
 });
+
+
 
 // requires routes from route folder
 app.use(require("./routes/api.js"));
 app.use(require("./routes/view.js"));
 
 // listens to port and alerts the user if succesful
-app.listen(Port, function(){
+app.listen(PORT, function(){
     console.log("app listening on port: " + PORT);
 });
