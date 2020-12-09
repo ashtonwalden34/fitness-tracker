@@ -13,9 +13,6 @@ A simple workout app designed to allow the user to input various workouts and tr
 - Express
 - MongoDB
 - Mongoose
-- Compression
-- Service worker
-- Data Caching
 
 
 # Links
